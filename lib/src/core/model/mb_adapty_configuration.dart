@@ -9,6 +9,8 @@ final class MBAdaptyConfiguration extends Equatable with EquatableMixin {
   final List<String> placementIDs;
   final String? locale;
   final AdaptyPaywallFetchPolicy? fetchPolicy;
+  final Function(Object e, String msg)? onAdaptyError;
+  final bool getCachedPaywallIfAvailable;
 
   MBAdaptyConfiguration({
     this.loadAllPlacementPaywallsOnInitialize = false,
@@ -18,6 +20,8 @@ final class MBAdaptyConfiguration extends Equatable with EquatableMixin {
     this.placementIDs = const [],
     this.locale,
     this.fetchPolicy,
+    this.onAdaptyError,
+    this.getCachedPaywallIfAvailable = false,
   });
 
   @override
@@ -29,6 +33,8 @@ final class MBAdaptyConfiguration extends Equatable with EquatableMixin {
         placementIDs,
         locale,
         fetchPolicy,
+        onAdaptyError,
+        getCachedPaywallIfAvailable,
       ];
 
   MBAdaptyConfiguration copyWith({
@@ -39,6 +45,8 @@ final class MBAdaptyConfiguration extends Equatable with EquatableMixin {
     List<String>? placementIDs,
     String? locale,
     AdaptyPaywallFetchPolicy? fetchPolicy,
+    Function(Object e, String msg)? onAdaptyError,
+    bool? getCachedPaywallIfAvailable,
   }) {
     return MBAdaptyConfiguration(
       loadAllPlacementPaywallsOnInitialize:
@@ -52,6 +60,9 @@ final class MBAdaptyConfiguration extends Equatable with EquatableMixin {
       placementIDs: placementIDs ?? this.placementIDs,
       locale: locale ?? this.locale,
       fetchPolicy: fetchPolicy ?? this.fetchPolicy,
+      onAdaptyError: onAdaptyError ?? this.onAdaptyError,
+      getCachedPaywallIfAvailable:
+          getCachedPaywallIfAvailable ?? this.getCachedPaywallIfAvailable,
     );
   }
 }

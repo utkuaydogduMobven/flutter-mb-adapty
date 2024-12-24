@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_mb_adapty/flutter_mb_adapty.dart';
 import 'package:flutter_mb_adapty/src/core/model/mb_adapty_configuration.dart';
 import 'package:flutter_mb_adapty/src/core/model/mb_adapty_placements.dart';
@@ -6,6 +7,12 @@ import 'package:mb_adapty_core/mb_adapty_core.dart';
 mixin AdaptyVmMixin on BaseCubit<AdaptyState> {
   void configureAdapty(MBAdaptyConfiguration configuration) {
     emit(state.copyWith(configuration: configuration));
+  }
+
+  void onAdaptyError(Object e, {String? message}) {
+    debugPrint(
+        '\n------\n[MBAdapty ERROR]: ${e.toString()}\n-MBAdapty Error Info: $message\n------\n');
+    state.configuration?.onAdaptyError?.call(e, message ?? '');
   }
 
   Future<void> loadAllPaywallsByPlacements<T extends IMBAdaptyRemoteConfig<T>,
